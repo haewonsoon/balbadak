@@ -1,11 +1,19 @@
 package com.back.balbadak.web;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashMap;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 @Controller
 public class TestAPIController {
@@ -81,6 +89,29 @@ public class TestAPIController {
         result.add(2, (HashMap<String, Object>) map.clone());
 
         return result;
+    }
+    
+    @GetMapping("/fileTest1")
+    public String showImg(Model model) throws IOException {
+        File file = new File("C:/user/1.png");
+        byte[] byte1 = Files.readAllBytes(file.toPath());
+        byte[] base64 = Base64.getEncoder().encode(byte1);
+        String str1 = Base64.getEncoder().encodeToString(byte1);
+
+        model.addAttribute("byte", base64);
+        model.addAttribute("str", str1);
+
+        return "test";
+    }
+
+    @GetMapping("/fileTest2")
+    public ResponseEntity<byte[]> showImg1() throws IOException {
+        File file = new File("C:/user/1.png");
+        byte[] byte1 = Files.readAllBytes(file.toPath());
+        byte[] base64 = Base64.getEncoder().encode(byte1);
+        String str1 = Base64.getEncoder().encodeToString(byte1);
+
+        return new ResponseEntity<>(base64, HttpStatus.OK);
     }
 
 }
