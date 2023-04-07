@@ -19,7 +19,6 @@ public class FileAPIController {
 		this.fileRepository = fileRepository;
 	}
 
-    @SuppressWarnings("unchecked")
     @RequestMapping(value="/file/FileFetchAPI")
     @ResponseBody
     public List<File> FileFetchAPI() {
@@ -28,7 +27,6 @@ public class FileAPIController {
         return result;
     }
     
-    @SuppressWarnings("unchecked")
     @RequestMapping(value="/file/FileAPI")
     @ResponseBody
     public Optional<File> FileAPI() {
