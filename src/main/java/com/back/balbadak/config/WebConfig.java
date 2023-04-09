@@ -26,11 +26,13 @@ public class WebConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		// TODO : uploadPath에서 전달받은 상세 경로를 resourcePath에 조합
+//		registry.addResourceHandler(fileUploadPath)
+//				.addResourceLocations(resourcePath)
+//				.resourceChain(true)
+//				.addResolver(new FilePathResolver());
+
 		registry.addResourceHandler(fileUploadPath)
-				.addResourceLocations(resourcePath)
-				.resourceChain(true)
-				.addResolver(new FilePathResolver());
+				.addResourceLocations(resourcePath);
 	}
 
 }

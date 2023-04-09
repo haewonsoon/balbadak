@@ -11,7 +11,6 @@ public class FilePathResolver extends PathResourceResolver implements ResourceRe
     protected Resource getResource(String resourcePath, Resource location) throws IOException {
         System.out.println("HERE : " + resourcePath);
         String[] path = resourcePath.split("/");
-        resourcePath = resourcePath.replaceAll("%20", " ");
         return super.getResource(resourcePath, location);
     }
 }
