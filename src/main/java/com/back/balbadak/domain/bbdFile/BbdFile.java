@@ -1,4 +1,4 @@
-package com.back.balbadak.domain.file;
+package com.back.balbadak.domain.bbdFile;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class File {
+public class BbdFile {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fileId;
@@ -24,7 +24,7 @@ public class File {
     private Long fileSize;
 
     @Builder
-    public File(Long fileId, String fileName, String filePath, String fileExtsn, Long fileSize) {
+    public BbdFile(Long fileId, String fileName, String filePath, String fileExtsn, Long fileSize) {
         this.fileId = fileId;
         this.fileName = fileName;
         this.filePath = filePath;
