@@ -12,6 +12,12 @@ import java.nio.file.Paths;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+	@Value("${url.front.local}")
+	private String frontLocalUrl;
+
+	@Value("${url.front.dev}")
+	private String frontDevUrl;
+
 	@Value("${file.resource.path}")
 	private String resourcePath;
 
@@ -20,7 +26,7 @@ public class WebConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://172.31.99.238:3000")
+		registry.addMapping("/**").allowedOrigins(frontLocalUrl, frontDevUrl)
 				.allowedMethods("GET", "POST").maxAge(3000);
 	}
 
