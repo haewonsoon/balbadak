@@ -13,5 +13,20 @@
     "name": "file.resource.path",
     "type": "java.lang.String",
     "description": "A description for 'file.resource.path'"
+  },
+  {
+    "name": "url.base",
+    "type": "java.lang.String",
+    "description": "A description for 'url.base'"
+  },
+  {
+    "name": "url.front.dev",
+    "type": "java.lang.String",
+    "description": "A description for 'url.front.dev'"
+  },
+  {
+    "name": "url.front.local",
+    "type": "java.lang.String",
+    "description": "A description for 'url.front.local'"
   }
 ]}
