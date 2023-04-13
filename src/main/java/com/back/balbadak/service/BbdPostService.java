@@ -26,4 +26,8 @@ public class BbdPostService {
 	public void postUpdate(BbdPost post) {
 		
 	}
+	
+	public BbdPost postSave(BbdPost post) {
+		return bbdPostRepository.save(post);
+	}
 }
