@@ -53,6 +53,7 @@ public class FileAPIController {
         	BbdFile file = fileList.get(i);
         	HashMap<String,Object> map = new HashMap<>();
         	
+        	map.put("itemPostId", file.getPostId());
         	map.put("itemFileId", file.getFileId());
             map.put("itemFilePath", baseUrl + "/upload" + file.getFilePath() + file.getFileName());
             map.put("itemFileName", file.getFileName());
