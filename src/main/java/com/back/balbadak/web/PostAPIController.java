@@ -1,19 +1,22 @@
 package com.back.balbadak.web;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.back.balbadak.domain.bbdFile.BbdFile;
 import com.back.balbadak.domain.bbdPost.BbdPost;
+import com.back.balbadak.model.CommonResponse;
 import com.back.balbadak.service.BbdFileService;
 import com.back.balbadak.service.BbdPostService;
 import com.google.gson.Gson;
@@ -21,7 +24,8 @@ import com.google.gson.GsonBuilder;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@Controller
+@RequestMapping("post")
+@RestController
 public class PostAPIController {
 
 	private final BbdPostService bbdPostService;
@@ -32,13 +36,13 @@ public class PostAPIController {
 		this.bbdFileService = bbdFileService;
 	}
 
-	@RequestMapping(value = "/post/postFetchAPI")
+	@RequestMapping(value = "/postFetchAPI")
 	@ResponseBody
 	public List<BbdPost> postFetchAPI() {
 		return bbdPostService.postFetchAll();
 	}
 
-	@RequestMapping(value = "/post/postUpdateAPI")
+	@RequestMapping(value = "/postUpdateAPI")
 	@ResponseBody
 	public void postUpdateAPI() {
 	}
@@ -79,11 +83,24 @@ public class PostAPIController {
 		return "OK 200";
 	}
 	
-	@PostMapping("/post/postSaveAPI")
-	public List<BbdFile> postSaveAPI(HttpServletRequest httpServletRequest,
-			  @RequestPart(value = "content") BbdPost postVO) throws IOException {
+//	@PostMapping("/postSaveAPI")
+//	public HashMap<String,Object> postSaveAPI(HttpServletRequest httpServletRequest,
+//			  @RequestPart(value = "content") BbdPost postVO) throws IOException {
+//		BbdPost newPost = bbdPostService.postSave(postVO);
+//		List<BbdFile> files = bbdFileService.fileSave(httpServletRequest, newPost);
+//		
+//		HashMap<String,Object> result = new HashMap<String,Object>();
+//		result.put("count", files.size());
+//		
+//		return result;
+//	}
+	
+	@PostMapping("/postSaveAPI2")
+	public ResponseEntity<CommonResponse<List<BbdFile>>> postSaveAPI2(HttpServletRequest httpServletRequest,
+			@RequestPart(value = "content") BbdPost postVO) throws IOException {
 		BbdPost newPost = bbdPostService.postSave(postVO);
-		List<BbdFile> files = bbdFileService.fileSave(httpServletRequest, newPost);
-		return files;
+		CommonResponse<List<BbdFile>> files = bbdFileService.fileSave(httpServletRequest, newPost);
+		
+		return ResponseEntity.ok(files);
 	}
 }
