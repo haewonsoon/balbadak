@@ -2,7 +2,9 @@ package com.back.balbadak.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -49,6 +51,28 @@ public class FileUtlis {
 		}
 		
 		return list;
+	}
+	
+	public String getUniqueFileName(String fileName) {
+		//파일명이 중복될 경우 파일이름 변경하기
+		//파일명에 현재시간(년원일 시분초 밀리초)을 붙여서 변경된 파일이름 구하기
+		//ex) a.txt => a_20220602113820123.txt
+		
+		//순수 파일명만 구하기 => a
+		int idx = fileName.lastIndexOf(".");
+		String fileNm = fileName.substring(0, idx);		// a
+		
+		//확장자 구하기 => .txt
+		String ext = fileName.substring(idx);		// .txt
+		
+		//변경된 파일이름
+		Date d = new Date();
+		SimpleDateFormat sdf = new  SimpleDateFormat("yyyyMMddHHmmssSSS");
+		// => '년원일시분초밀리초' 포멧
+		String today = sdf.format(d);
+		String result = fileNm + "_" + today + ext;
+		
+		return result;
 	}
 	
 }
