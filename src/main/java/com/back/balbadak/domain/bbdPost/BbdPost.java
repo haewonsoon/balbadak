@@ -1,6 +1,5 @@
 package com.back.balbadak.domain.bbdPost;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,10 +15,8 @@ public class BbdPost {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
-    @Column(length = 500, nullable = false)
     private String postUserId;
     private String postTitle;
-    @Column(columnDefinition = "TEXT", nullable = false)
     private String postContent;
     private Long postLike;
 

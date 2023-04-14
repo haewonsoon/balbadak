@@ -1,9 +1,7 @@
 package com.back.balbadak.web;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.back.balbadak.domain.bbdFile.BbdFile;
 import com.back.balbadak.domain.bbdPost.BbdPost;
+import com.back.balbadak.service.BbdFileService;
 import com.back.balbadak.service.BbdPostService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,9 +25,11 @@ import jakarta.servlet.http.HttpServletRequest;
 public class PostAPIController {
 
 	private final BbdPostService bbdPostService;
+	private final BbdFileService bbdFileService;
 
-	public PostAPIController(BbdPostService bbdPostService) {
+	public PostAPIController(BbdPostService bbdPostService, BbdFileService bbdFileService) {
 		this.bbdPostService = bbdPostService;
+		this.bbdFileService = bbdFileService;
 	}
 
 	@RequestMapping(value = "/post/postFetchAPI")
@@ -78,19 +80,10 @@ public class PostAPIController {
 	}
 	
 	@PostMapping("/post/postSaveAPI")
-	public String postSaveAPI(HttpServletRequest httpServletRequest,
+	public List<BbdFile> postSaveAPI(HttpServletRequest httpServletRequest,
 			  @RequestPart(value = "content") BbdPost postVO) throws IOException {
 		BbdPost newPost = bbdPostService.postSave(postVO);
-		System.out.println("HERE : " + newPost.toString());
-		
-		MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)httpServletRequest;
-
-		List<MultipartFile> files = multiRequest.getFiles("files");
-		for (MultipartFile multipartFile : files) {
-			System.out.println(multipartFile.getOriginalFilename());
-		}
-
-		System.out.println(postVO.getPostContent());
-		return "OK 200";
+		List<BbdFile> files = bbdFileService.fileSave(httpServletRequest, newPost);
+		return files;
 	}
 }
