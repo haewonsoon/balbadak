@@ -1,6 +1,7 @@
 package com.back.balbadak.domain.bbdFile;
 
 import com.back.balbadak.domain.bbdPost.BbdPost;
+import com.back.balbadak.model.BaseEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +22,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString(of = { "fileId", "fileName", "filePath", "postId" })
-public class BbdFile {
+public class BbdFile extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long fileId;

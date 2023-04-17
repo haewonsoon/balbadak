@@ -3,7 +3,11 @@ package com.back.balbadak.domain.bbdPost;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
 import com.back.balbadak.domain.bbdFile.BbdFile;
+import com.back.balbadak.model.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,13 +24,15 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = { "postId", "postUserId", "postContent" })
-public class BbdPost {
+@DynamicInsert
+public class BbdPost extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long postId;
 	private String postUserId;
 	private String postTitle;
 	private String postContent;
+	@ColumnDefault("0")
 	private Long postLike;
 
 	@OneToMany(mappedBy = "bbdPost")
