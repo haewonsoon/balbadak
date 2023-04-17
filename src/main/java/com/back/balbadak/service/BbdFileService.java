@@ -54,7 +54,8 @@ public class BbdFileService {
 				newFile.setFileExtsn(fileName);
 				newFile.setFilePath("/2023/04/");
 				newFile.setFileSize(fileSize);
-				newFile.setPostId(postVO.getPostId());
+				newFile.setBbdPost(postVO);
+//				newFile.setPostId(postVO.getPostId());
 
 				//[2] 여러 개의 Map을 List에 저장
 				list.add(newFile);
