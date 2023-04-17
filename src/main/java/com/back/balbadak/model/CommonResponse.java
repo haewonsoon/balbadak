@@ -32,7 +32,7 @@ public class CommonResponse<T> {
     private boolean isSuccess = true;
     
 //    @Schema(required = false, description = "total page count if API respond with a pageable")
-    private Integer totalPages;
+//    private Integer totalPages;
 
 
     /**
