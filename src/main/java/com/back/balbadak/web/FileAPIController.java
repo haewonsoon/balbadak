@@ -47,7 +47,8 @@ public class FileAPIController {
     @ResponseBody
     public ArrayList<HashMap<String,Object>> showImg2() throws IOException {
         ArrayList<HashMap<String,Object>> result = new ArrayList<>();
-        List<BbdFile> fileList = bbdFileRepository.findAll();
+//        List<BbdFile> fileList = bbdFileRepository.findAll();
+        List<BbdFile> fileList = bbdFileRepository.findAllByOrderByCreateDtDesc();
         
         for (int i=0; i < fileList.size(); i++) {
         	BbdFile file = fileList.get(i);
@@ -59,6 +60,7 @@ public class FileAPIController {
             map.put("itemFileName", file.getFileName());
             map.put("itemPostContent", file.getBbdPost().getPostContent());
             map.put("itemPostLike", file.getBbdPost().getPostLike());
+            map.put("itemCreateDt", file.getCreateDt());
 
             result.add(i, map);
         }
