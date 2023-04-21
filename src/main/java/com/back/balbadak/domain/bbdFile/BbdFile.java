@@ -19,7 +19,6 @@ import lombok.ToString;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 @ToString(of = { "fileId", "fileName", "filePath", "postId" })
 public class BbdFile extends BaseEntity {

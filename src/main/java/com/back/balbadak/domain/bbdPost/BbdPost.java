@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import com.back.balbadak.domain.bbdFile.BbdFile;
 import com.back.balbadak.model.BaseEntity;
@@ -25,6 +26,7 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = { "postId", "postUserId", "postContent" })
 @DynamicInsert
+@DynamicUpdate
 public class BbdPost extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

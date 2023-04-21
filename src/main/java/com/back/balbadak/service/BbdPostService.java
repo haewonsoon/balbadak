@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.back.balbadak.domain.bbdPost.BbdPost;
 import com.back.balbadak.domain.bbdPost.BbdPostRepository;
+import com.back.balbadak.model.CommonResponse;
 
 import jakarta.transaction.Transactional;
 
@@ -23,8 +24,11 @@ public class BbdPostService {
 	}
 	
 	@Transactional
-	public void postUpdate(BbdPost post) {
-		
+	public CommonResponse<BbdPost> postUpdate(BbdPost post) {
+		if (post.getPostId() != null) {
+			bbdPostRepository.save(post);
+		}
+		return CommonResponse.create(post);
 	}
 	
 	public BbdPost postSave(BbdPost post) {

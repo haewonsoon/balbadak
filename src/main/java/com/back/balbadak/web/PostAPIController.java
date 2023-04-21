@@ -1,11 +1,11 @@
 package com.back.balbadak.web;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -68,11 +68,11 @@ public class PostAPIController {
 		System.out.println(post.getPostContent());
 		return "OK 200";
 	}
-	
+
 	@PostMapping("/filesUploadTest")
-	public String filesUploadTest(HttpServletRequest httpServletRequest,
-			  @RequestPart(value = "content") BbdPost postVO) throws IOException {
-		MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)httpServletRequest;
+	public String filesUploadTest(HttpServletRequest httpServletRequest, @RequestPart(value = "content") BbdPost postVO)
+			throws IOException {
+		MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) httpServletRequest;
 
 		List<MultipartFile> files = multiRequest.getFiles("files");
 		for (MultipartFile multipartFile : files) {
@@ -82,7 +82,7 @@ public class PostAPIController {
 		System.out.println(postVO.getPostContent());
 		return "OK 200";
 	}
-	
+
 //	@PostMapping("/postSaveAPI")
 //	public HashMap<String,Object> postSaveAPI(HttpServletRequest httpServletRequest,
 //			  @RequestPart(value = "content") BbdPost postVO) throws IOException {
@@ -94,13 +94,22 @@ public class PostAPIController {
 //		
 //		return result;
 //	}
-	
+
 	@PostMapping("/postSaveAPI2")
 	public ResponseEntity<CommonResponse<List<BbdFile>>> postSaveAPI2(HttpServletRequest httpServletRequest,
 			@RequestPart(value = "content") BbdPost postVO) throws IOException {
 		BbdPost newPost = bbdPostService.postSave(postVO);
 		CommonResponse<List<BbdFile>> files = bbdFileService.fileSave(httpServletRequest, newPost);
-		
+
 		return ResponseEntity.ok(files);
+	}
+
+	@PostMapping("/postUpdateAPI")
+	public ResponseEntity<CommonResponse<BbdPost>> postUpdateAPI(@RequestBody BbdPost postVO)
+			throws IOException {
+		CommonResponse<BbdPost> newPost = bbdPostService.postUpdate(postVO);
+//		CommonResponse<List<BbdFile>> files = bbdFileService.fileSave(httpServletRequest, newPost);
+
+		return ResponseEntity.ok(newPost);
 	}
 }

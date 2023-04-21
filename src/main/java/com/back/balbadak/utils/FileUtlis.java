@@ -39,11 +39,14 @@ public class FileUtlis {
 
 				//업로드된 파일 정보 저장, (파일크기, 파일명2개를 VO나 Map으로 묶으면 된다)
 				//[1] Map에 저장
-				BbdFile newFile = new BbdFile(); // <>뒤에는 생략가능
-				newFile.setFileName(fileName);
-				newFile.setFileExtsn(fileName);
-				newFile.setFilePath("/2023/04/");
-				newFile.setFileSize(fileSize);
+//				BbdFile newFile = new BbdFile(); // <>뒤에는 생략가능
+//				newFile.setFileName(fileName);
+//				newFile.setFileExtsn(fileName);
+//				newFile.setFilePath("/2023/04/");
+//				newFile.setFileSize(fileSize);
+				
+				BbdFile newFile = BbdFile.builder().fileName(fileName).fileExtsn(fileName).filePath("/2023/04/")
+						.fileSize(fileSize).build();
 
 				//[2] 여러 개의 Map을 List에 저장
 				list.add(newFile);

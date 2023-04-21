@@ -20,50 +20,55 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class BbdFileService {
-	
+
 	private final BbdFileRepository bbdFileRepository;
-	
+
 	public BbdFileService(BbdFileRepository bbdFileRepository) {
 		this.bbdFileRepository = bbdFileRepository;
 	}
-	
-	public CommonResponse<List<BbdFile>> fileSave(HttpServletRequest request, BbdPost postVO) throws IllegalStateException, IOException {
-		MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;
+
+	public CommonResponse<List<BbdFile>> fileSave(HttpServletRequest request, BbdPost postVO)
+			throws IllegalStateException, IOException {
+		MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 		List<BbdFile> list = new ArrayList<BbdFile>();
 
 		List<MultipartFile> fileMap = multiRequest.getFiles("files");
-		for(MultipartFile multipartFile : fileMap) {
-			if(!multipartFile.isEmpty()) {
-				Long fileSize = multipartFile.getSize();	// 파일 크기
-				String fileName = multipartFile.getOriginalFilename();	// 원래 파일명
+		for (MultipartFile multipartFile : fileMap) {
+			if (!multipartFile.isEmpty()) {
+				Long fileSize = multipartFile.getSize(); // 파일 크기
+				String fileName = multipartFile.getOriginalFilename(); // 원래 파일명
 
-				//변경된 파일이름 구하기
+				// 변경된 파일이름 구하기
 //				String fileName = getUniqueFileName(oName);
 
-				//업로드할 폴더 구하기
+				// 업로드할 폴더 구하기
 //				String uploadPath = getUploadPath(request, uploadFlag);
 
-				//파일 업로드 처리
+				// 파일 업로드 처리
 				File file = new File("C:/user/2023/04/", fileName);
 				multipartFile.transferTo(file);
 
-				//업로드된 파일 정보 저장, (파일크기, 파일명2개를 VO나 Map으로 묶으면 된다)
-				//[1] Map에 저장
-				BbdFile newFile = new BbdFile(); // <>뒤에는 생략가능
-				newFile.setFileName(fileName);
-				newFile.setFileExtsn(fileName);
-				newFile.setFilePath("/2023/04/");
-				newFile.setFileSize(fileSize);
-				newFile.setBbdPost(postVO);
+				// 업로드된 파일 정보 저장, (파일크기, 파일명2개를 VO나 Map으로 묶으면 된다)
+				// [1] Map에 저장
+//				BbdFile newFile = new BbdFile(); // <>뒤에는 생략가능
+//				newFile.setFileName(fileName);
+//				newFile.setFileExtsn(fileName);
+//				newFile.setFilePath("/2023/04/");
+//				newFile.setFileSize(fileSize);
+//				newFile.setBbdPost(postVO);
 //				newFile.setPostId(postVO.getPostId());
 
-				//[2] 여러 개의 Map을 List에 저장
+				BbdFile newFile = BbdFile.builder().fileName(fileName).fileExtsn(fileName).filePath("/2023/04/")
+						.fileSize(fileSize).bbdPost(postVO).build();
+
+				// [2] 여러 개의 Map을 List에 저장
 				list.add(newFile);
 			}
 		}
-		
-		if (list.size() > 0) bbdFileRepository.saveAll(list);
-		
+
+		if (list.size() > 0)
+			bbdFileRepository.saveAll(list);
+
 		return CommonResponse.create(list);
 	}
 
