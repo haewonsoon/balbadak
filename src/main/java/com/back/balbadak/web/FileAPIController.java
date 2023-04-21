@@ -54,13 +54,13 @@ public class FileAPIController {
         	BbdFile file = fileList.get(i);
         	HashMap<String,Object> map = new HashMap<>();
         	
-        	map.put("itemPostId", file.getBbdPost().getPostId());
-        	map.put("itemFileId", file.getFileId());
-            map.put("itemFilePath", baseUrl + "/upload" + file.getFilePath() + file.getFileName());
-            map.put("itemFileName", file.getFileName());
-            map.put("itemPostContent", file.getBbdPost().getPostContent());
-            map.put("itemPostLike", file.getBbdPost().getPostLike());
-            map.put("itemCreateDt", file.getCreateDt());
+        	map.put("postId", file.getBbdPost().getPostId());
+        	map.put("fileId", file.getFileId());
+            map.put("filePath", baseUrl + "/upload" + file.getFilePath() + file.getFileName());
+            map.put("fileName", file.getFileName());
+            map.put("postContent", file.getBbdPost().getPostContent());
+            map.put("postLike", file.getBbdPost().getPostLike());
+            map.put("createDt", file.getCreateDt());
 
             result.add(i, map);
         }
