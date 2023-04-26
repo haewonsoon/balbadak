@@ -26,6 +26,8 @@ public class BbdFile extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long fileId;
 	@Column(length = 500, nullable = false)
+	private String fileOriginName;
+	@Column(length = 500, nullable = false)
 	private String fileName;
 	@Column(columnDefinition = "TEXT", nullable = false)
 	private String filePath;
@@ -38,9 +40,10 @@ public class BbdFile extends BaseEntity {
 	private BbdPost bbdPost;
 
 	@Builder
-	public BbdFile(Long fileId, String fileName, String filePath, String fileExtsn, Long fileSize, 
+	public BbdFile(Long fileId,String fileOriginName,String fileName, String filePath, String fileExtsn, Long fileSize, 
 			BbdPost bbdPost) {
 		this.fileId = fileId;
+		this.fileOriginName = fileOriginName;
 		this.fileName = fileName;
 		this.filePath = filePath;
 		this.fileExtsn = fileExtsn;

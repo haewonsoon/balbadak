@@ -37,7 +37,7 @@ public class WebConfig implements WebMvcConfigurer {
 //				.resourceChain(true)
 //				.addResolver(new FilePathResolver());
 
-		registry.addResourceHandler(fileUploadPath)
+		registry.addResourceHandler(fileUploadPath + "**")
 				.addResourceLocations(resourcePath);
 	}
 

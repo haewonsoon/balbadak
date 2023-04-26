@@ -24,6 +24,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.5'
     implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+    
+    implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
+    
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'

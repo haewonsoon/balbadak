@@ -20,6 +20,9 @@ public class FileAPIController {
 
     @Value("${url.base}")
     private String baseUrl;
+    
+    @Value("${file.upload.path}")
+	private String fileUploadPath;
 	
 	private final BbdFileRepository bbdFileRepository;
 	
@@ -56,8 +59,8 @@ public class FileAPIController {
         	
         	map.put("postId", file.getBbdPost().getPostId());
         	map.put("fileId", file.getFileId());
-            map.put("filePath", baseUrl + "/upload" + file.getFilePath() + file.getFileName());
-            map.put("fileName", file.getFileName());
+            map.put("filePath", baseUrl + fileUploadPath + file.getFilePath() + "thumb_" + file.getFileName());
+            map.put("fileName", file.getFileOriginName());
             map.put("postContent", file.getBbdPost().getPostContent());
             map.put("postLike", file.getBbdPost().getPostLike());
             map.put("createDt", file.getCreateDt());
