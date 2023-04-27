@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.back.balbadak.domain.bbdFile.BbdFile;
 import com.back.balbadak.domain.bbdFile.BbdFileRepository;
 import com.back.balbadak.domain.bbdPost.BbdPost;
-import com.back.balbadak.model.CommonResponse;
 import com.back.balbadak.utils.FileUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -61,14 +60,14 @@ public class BbdFileService {
 		return bbdFileRepository.findById(postVO.getPostId());
 	}
 
-	public CommonResponse<List<BbdFile>> fileSave(HttpServletRequest request, BbdPost postVO)
+	public List<BbdFile> fileSave(HttpServletRequest request, BbdPost postVO)
 			throws IllegalStateException, IOException {
 		MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-		List<BbdFile> list = FileUtils.fileUpload(multiRequest, postVO, uploadPath);
-		if (list.size() > 0)
-			bbdFileRepository.saveAll(list);
+		List<BbdFile> result = FileUtils.fileUpload(multiRequest, postVO, uploadPath);
+		if (result.size() > 0)
+			bbdFileRepository.saveAll(result);
 
-		return CommonResponse.create(list);
+		return result;
 	}
 
 }
