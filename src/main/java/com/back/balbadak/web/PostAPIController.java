@@ -1,6 +1,8 @@
 package com.back.balbadak.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -38,13 +40,8 @@ public class PostAPIController {
 
 	@RequestMapping(value = "/postFetchAPI")
 	@ResponseBody
-	public List<BbdPost> postFetchAPI() {
+	public ArrayList<HashMap<String,Object>> postFetchAPI() {
 		return bbdPostService.postFetchAll();
-	}
-
-	@RequestMapping(value = "/postUpdateAPI")
-	@ResponseBody
-	public void postUpdateAPI() {
 	}
 
 	@PostMapping("/filesUpload")
@@ -95,8 +92,8 @@ public class PostAPIController {
 //		return result;
 //	}
 
-	@PostMapping("/postSaveAPI2")
-	public ResponseEntity<CommonResponse<List<BbdFile>>> postSaveAPI2(HttpServletRequest httpServletRequest,
+	@PostMapping("/postSaveAPI")
+	public ResponseEntity<CommonResponse<List<BbdFile>>> postSaveAPI(HttpServletRequest httpServletRequest,
 			@RequestPart(value = "content") BbdPost postVO) throws IOException {
 		BbdPost newPost = bbdPostService.postSave(postVO);
 		CommonResponse<List<BbdFile>> files = bbdFileService.fileSave(httpServletRequest, newPost);

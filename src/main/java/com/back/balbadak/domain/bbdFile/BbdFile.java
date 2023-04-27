@@ -14,13 +14,12 @@ import jakarta.persistence.ManyToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 @Entity
 @Getter
 @NoArgsConstructor
-@ToString(of = { "fileId", "fileName", "filePath", "postId" })
+@ToString(of = { "fileId", "fileName", "filePath" })
 public class BbdFile extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

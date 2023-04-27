@@ -1,9 +1,5 @@
 package com.back.balbadak.model;
 
-import java.util.Locale;
-
-import org.springframework.context.i18n.LocaleContextHolder;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //import cbhs.framework.utils.MessageUtils;

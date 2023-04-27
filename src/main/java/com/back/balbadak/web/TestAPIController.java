@@ -147,7 +147,6 @@ public class TestAPIController {
         File file = new File("C:/user/2.png");
         byte[] byte1 = Files.readAllBytes(file.toPath());
         byte[] base64 = Base64.getEncoder().encode(byte1);
-        String str1 = Base64.getEncoder().encodeToString(byte1);
 
         return new ResponseEntity<>(base64, HttpStatus.OK);
     }
