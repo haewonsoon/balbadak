@@ -35,6 +35,9 @@ public class DateTimeUtils {
 		return LocalDate.now().getDayOfMonth();
 	}
 	
+	public static String getTextDateFormat(LocalDateTime date) {
+		return date.format(Constant.TEXT_DATE_FORMAT);
+	}
 	
 
 }

@@ -3,6 +3,7 @@ package com.back.balbadak.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.back.balbadak.domain.bbdFile.BbdFile;
 import com.back.balbadak.domain.bbdPost.BbdPost;
 import com.back.balbadak.domain.bbdPost.BbdPostRepository;
+import com.back.balbadak.utils.DateTimeUtils;
 
 import jakarta.transaction.Transactional;
 
@@ -46,7 +48,7 @@ public class BbdPostService {
         	postMap.put("postId", post.getPostId());
         	postMap.put("postContent", post.getPostContent());
         	postMap.put("postLike", post.getPostLike());
-        	postMap.put("createDt", post.getCreateDt());
+        	postMap.put("createDt", DateTimeUtils.getTextDateFormat(post.getCreateDt()));
         	postMap.put("files", files);
         	
             result.add(postMap);
@@ -66,5 +68,9 @@ public class BbdPostService {
 	
 	public BbdPost postSave(BbdPost post) {
 		return bbdPostRepository.save(post);
+	}
+
+	public Optional<BbdPost> postFetchById(BbdPost post) {
+		return bbdPostRepository.findById(post.getPostId());
 	}
 }

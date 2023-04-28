@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.back.balbadak.domain.bbdFile.BbdFile;
 import com.back.balbadak.domain.bbdFile.BbdFileRepository;
 import com.back.balbadak.domain.bbdPost.BbdPost;
+import com.back.balbadak.utils.DateTimeUtils;
 import com.back.balbadak.utils.FileUtils;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -48,7 +49,7 @@ public class BbdFileService {
             map.put("fileName", file.getFileOriginName());
             map.put("postContent", file.getBbdPost().getPostContent());
             map.put("postLike", file.getBbdPost().getPostLike());
-            map.put("createDt", file.getCreateDt());
+            map.put("createDt", DateTimeUtils.getTextDateFormat(file.getCreateDt()));
 
             result.add(i, map);
         }
@@ -56,8 +57,8 @@ public class BbdFileService {
         return result;
 	}
 	
-	public Optional<BbdFile> fileFetchById(BbdPost postVO) {
-		return bbdFileRepository.findById(postVO.getPostId());
+	public Optional<BbdFile> fileFetchById(BbdFile fileVO) {
+		return bbdFileRepository.findById(fileVO.getFileId());
 	}
 
 	public List<BbdFile> fileSave(HttpServletRequest request, BbdPost postVO)

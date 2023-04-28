@@ -10,4 +10,6 @@ public class Constant {
 	public static final DateTimeFormatter DEFAULT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	public static final DateTimeFormatter SIMPLE_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd");
 	public static final DateTimeFormatter SIMPLE_DATETIME_FORMAT = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+	
+	public static final DateTimeFormatter TEXT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일");
 }

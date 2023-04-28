@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +37,13 @@ public class PostAPIController {
 	public ResponseEntity<CommonResponse<ArrayList<HashMap<String, Object>>>> postFetchAPI() {
 		CommonResponse<ArrayList<HashMap<String, Object>>> result = CommonResponse
 				.create(bbdPostService.postFetchAll());
+		return ResponseEntity.ok(result);
+	}
+	
+	@RequestMapping(value = "/postFetchByIdAPI")
+	public ResponseEntity<CommonResponse<Optional<BbdPost>>> postFetchByIdAPI(@RequestBody BbdPost postVO) {
+		CommonResponse<Optional<BbdPost>> result = CommonResponse
+				.create(bbdPostService.postFetchById(postVO));
 		return ResponseEntity.ok(result);
 	}
 
