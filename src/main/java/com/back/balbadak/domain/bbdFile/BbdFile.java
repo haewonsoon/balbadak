@@ -2,6 +2,7 @@ package com.back.balbadak.domain.bbdFile;
 
 import com.back.balbadak.domain.bbdPost.BbdPost;
 import com.back.balbadak.model.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,10 +33,10 @@ public class BbdFile extends BaseEntity {
 	private String filePath;
 	private String fileExtsn;
 	private Long fileSize;
-//	private Long postId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "post_id")
+	@JsonIgnore
 	private BbdPost bbdPost;
 
 	@Builder
@@ -47,7 +48,6 @@ public class BbdFile extends BaseEntity {
 		this.filePath = filePath;
 		this.fileExtsn = fileExtsn;
 		this.fileSize = fileSize;
-//		this.postId = postId;
 		this.bbdPost = bbdPost;
 	}
 	

@@ -9,6 +9,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.back.balbadak.domain.bbdFile.BbdFile;
 import com.back.balbadak.model.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,6 +39,7 @@ public class BbdPost extends BaseEntity {
 	private Long postLike;
 
 	@OneToMany(mappedBy = "bbdPost")
+	@JsonIgnore
 	private List<BbdFile> files = new ArrayList<>();
 
 	@Builder
