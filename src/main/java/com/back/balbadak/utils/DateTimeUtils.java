@@ -39,5 +39,8 @@ public class DateTimeUtils {
 		return date.format(Constant.TEXT_DATE_FORMAT);
 	}
 	
+	public static String getTextDateFormat(LocalDate date) {
+		return date.format(Constant.TEXT_DATE_FORMAT);
+	}
 
 }
