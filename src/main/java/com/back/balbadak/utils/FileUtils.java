@@ -56,7 +56,9 @@ public class FileUtils {
 	public static String getUniqueFileName(String fileName) {
 		int idx = fileName.lastIndexOf(".");
 		String fileNm = fileName.substring(0, idx);
-		return fileNm + "_" + DateTimeUtils.nowSimpleDateTime() + getFileExtsn(fileName);
+		String ext = fileName.substring(idx);
+
+		return fileNm + "_" + DateTimeUtils.nowSimpleDateTime() + ext;
 	}
 
 	public static String getFileExtsn(String fileName) {
