@@ -57,8 +57,8 @@ public class PostAPIController {
 	}
 
 	@PostMapping("/postUpdateAPI")
-	public ResponseEntity<CommonResponse<BbdPost>> postUpdateAPI(@RequestBody BbdPost postVO) throws IOException {
-		CommonResponse<BbdPost> result = CommonResponse.create(bbdPostService.postUpdate(postVO));
+	public ResponseEntity<CommonResponse<Integer>> postUpdateAPI(@RequestBody BbdPost postVO) throws IOException {
+		CommonResponse<Integer> result = CommonResponse.create(bbdPostService.postUpdate(postVO));
 		return ResponseEntity.ok(result);
 	}
 }

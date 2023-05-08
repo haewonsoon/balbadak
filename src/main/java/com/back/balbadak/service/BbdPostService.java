@@ -58,10 +58,12 @@ public class BbdPostService {
 	}
 	
 	@Transactional
-	public BbdPost postUpdate(BbdPost post) {
-		BbdPost result = BbdPost.builder().build();
+	public int postUpdate(BbdPost post) {
+		int result = 0;
 		if (post.getPostId() != null) {
-			result = bbdPostRepository.save(post);
+			Long postId = post.getPostId();
+			String postContent = post.getPostContent();
+			result = bbdPostRepository.updatePost(postId, postContent);
 		}
 		return result;
 	}
